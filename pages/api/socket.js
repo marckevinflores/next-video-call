@@ -1,3 +1,4 @@
+import config from '@/config';
 import { Server } from 'socket.io';
 
 // Object to store room data
@@ -21,7 +22,7 @@ const SocketHandler = (req, res) => {
 
         const room = rooms[roomId];
         // Check if the room has fewer than 2 participants
-        if (room.participants.length < 2) {
+        if (room.participants.length < config.userLimit) {
           // Add the participant to the room
           room.participants.push(userId);
           socket.join(roomId);
